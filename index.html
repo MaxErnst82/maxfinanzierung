@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Baufinanzierung</title>
+  <meta name="description" content="Berechnung der maximalen Kreditsumme f&uuml;r eine Immobilie">
+
+  <!-- Google / Search Engine Tags -->
+  <meta itemprop="name" content="Baufinanzierer">
+  <meta itemprop="description" content="Berechnung der maximalen Kreditsumme f&uuml;r eine Immobilie">
+  <meta itemprop="image" content="https://ETF-Portfoliomanager.de/images/Portfoliomanager_Icon.JPG">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://www.maxfinanzierung.de">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Baufinanzierer">
+  <meta property="og:description" content="Berechnung der maximalen Kreditsumme f&uuml;r eine Immobilie">
+  <meta property="og:image" content="https://ETF-Portfoliomanager.de/images/Portfoliomanager_Icon.JPG">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Baufinanzierer">
+  <meta name="twitter:description" content="Berechnung der maximalen Kreditsumme f&uuml;r eine Immobilie">
+  <meta name="twitter:image" content="https://ETF-Portfoliomanager.de/images/Portfoliomanager_Icon.JPG">
+
+  <!-- Meta Tags Generated via http://heymeta.com -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/Portfoliomanager_favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Max L.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GG32GXX6P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-5GG32GXX6P');
+  </script>
+
+  <!-- Bootstrap Core CSS file -->
+  <link defer rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Get Google fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Max L.">
+  <meta name="robots" content="index, follow">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.js"></script>
+  <!-- Override CSS file - add your own CSS rules -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container-fluid bg-dark text-light p-0" style="max-width: 1000px; font-family: Montserrat">
+    <div class="row">
+      <div class="col-lg-12 pt-5 text-center">
+          <h2><a href="baufinanzierer.html">Baufinanzierer</a></h2>
+      </div>
+  </div>
+    <hr>
+
+    <div class="row-12">
+      <div class="card bg-dark border-secondary box-shadow m-2">
+        <div class="col-12">
+
+          <div class="row mytext">
+            <div class="col-lg-12 pt-md-5">
+              <h4 class=" text-left">Wieviel Haus kann ich mir leisten?</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-lg-3">
+
+              <form>
+                <div class="form-group">
+                  <label for="monatliche_Zahlung">Monatliche Zahlung in EUR</label><br>
+                  <input id="AnnuitaetSlider" type="range" min="100" max="10000" step="100" value="1000" class="slider"
+                    oninput="AnnuitaetChangeSlider()">
+                  <input id="monatliche_Zahlung" type="number" min="100" max="10000" class="form-control"
+                    placeholder="Monatliche Zahlung (Annuität)" text-light oninput="AnnuitaetChangeInputfield()"
+                    bg-dark>
+                </div>
+
+                <div class="form-group">
+                  <label for="nominalzins_prozent">Nominalzins in %</label><br>
+                  <input id="ZinsSlider" type="range" min="0.1" max="7" step="0.1" value="3.5" class="slider"
+                    oninput="ZinsChangeSlider()">
+
+                  <input id="nominalzins_prozent" type="number" min="0.1" max="7" value="4" class="form-control"
+                    oninput="ZinsChangeInputfield()" placeholder="Zinssatz in %" text-light bg-dark>
+
+                </div>
+              </form>
+            </div>
+            <div class="col-12 col-lg-9">
+              <div id="ChartKreditsumme" class="chart"></div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="row-12">
+      <div class="card bg-dark border-secondary box-shadow  m-2">
+        <div class="col-12">
+          <div class="row mytext">
+            <div class="col-lg-12 pt-md-5">
+              <h4  class="text-left">Wie ver&auml;ndert sich die Laufzeit mit den Zinsen?</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-lg-3">
+              <form>
+                <div class="form-group">
+                  <label for="kreditsumme">Kreditsumme</label>
+                  <input id="kreditsumme" class="form-control" placeholder="Eingabe Kreditsumme"
+                    oninput="ErstelleLaufzeitGrafik()" text-light bg-dark>
+                  <small id="KreditsummeHelp" class="form-text text-muted">Anvisierte Kreditsumme</small>
+                </div>
+              </form>
+                
+            </div>
+            <div class="col-12 col-lg-9">
+              <div id="ChartLaufzeit" class="chart"></div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="row-12">
+        <div class="card bg-dark border-secondary box-shadow  m-2">
+            <div class="col-12">
+                <div class="row mytext">
+                    <div class="col-12">
+                        <h4 class=" text-left">Laufzeitänderung bei Anpassung der monatlichen Zahlung</h4>
+
+                        <table class=".table-sm table-dark table-striped table-condensed" style="width: 100%; text-align: center; white-space: nowrap;">
+
+                            <tr>
+                                <th style="text-align: left">Anfängliche Tilgung</th>
+                                <th>Tilgung in Prozent</th>
+                                <th>Monatliche Rate</th>
+                                <th>Delta zur Standardrate</th>
+                                <th>Laufzeit</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: left">Einheit</th>
+                                <th>[%]</th>
+                                <th>[EUR p.m.]</th>
+                                <th>[EUR p.m.]</th>
+                                <th>[Jahre]</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: left">Standardtilung -1%</th>
+                                <td><div id="tilgung_proz_minus1"></div></td>
+                                <td><div id="monatliche_Zahlung_minus1"></div></td>
+                                <td><div id="delta_zu_Zahlung_standard_minus1"></div></td>
+                                <td><div id="laufzeit_standard_minus1"></div></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: left">Standardtilgung</th>
+                                <td><div id="tilgung_proz_standard"></div></td>
+                                <td><div id="monatliche_Zahlung_standard"></div></td>
+                                <td>+/-0</td>
+                                <td><div id="laufzeit_standard"></div></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: left">Standardtilung +1%</th>
+                                <td><div id="tilgung_proz_plus1"></div></td>
+                                <td><div id="monatliche_Zahlung_plus1"></div></td>
+                                <td><div id="delta_zu_Zahlung_standard_plus1"></div></td>
+                                <td><div id="laufzeit_standard_plus1"></div></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: left">Standardtilung +5%</th>
+                                <td><div id="tilgung_proz_plus5"></div></td>
+                                <td><div id="monatliche_Zahlung_plus5"></div></td>
+                                <td><div id="delta_zu_Zahlung_standard_plus5"></div></td>
+                                <td><div id="laufzeit_standard_plus5"></div></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: left">Standardtilung +8%</th>
+                                <td><div id="tilgung_proz_plus8"></div></td>
+                                <td><div id="monatliche_Zahlung_plus8"></div></td>
+                                <td><div id="delta_zu_Zahlung_standard_plus8"></div></td>
+                                <td><div id="laufzeit_standard_plus8"></div></td>
+                            </tr>
+
+
+
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+        <div class="row-12">
+            <div class="card bg-dark border-secondary box-shadow  m-2">
+                <div class="col-12">
+                    <div class="row mytext">
+                        <div class="col-12">
+                            <h4 class=" text-left">Was muss ich bei einem Annuitätendarlehen beachten?</h4>
+                            <p>
+                                Ein Annuit&auml;tendarlehen ist eine sehr g&auml;ngige Form der Kreditaufnahme, bei der der
+                                Kreditnehmer eine bestimmte Summe von einem Kreditgeber erh&auml;lt und diese Summe dann in
+                                gleichbleibenden Raten (Annuit&auml;ten) zur&uuml;ckzahlt.
+                                Hier sind einige wichtige Dinge, die Sie beachten sollten, wenn Sie ein Annuit&auml;tendarlehen
+                                aufnehmen:
+                            </p>
+                            <ol>
+                                <li>
+                                    Zinssatz: Der Zinssatz ist ein wichtiger Faktor bei der Aufnahme eines Annuit&auml;tendarlehens.
+                                    Ein h&ouml;herer Zinssatz bedeutet, dass Sie mehr f&uuml;r das Darlehen insgesamt zahlen werden.
+                                </li>
+
+                                <li>
+                                    Laufzeit: Die Laufzeit des Darlehens ist die Zeit, die Sie ben&ouml;tigen, um das Darlehen
+                                    vollst&auml;ndig zur&uuml;ckzuzahlen.
+                                    Eine l&auml;ngere Laufzeit bedeutet normalerweise niedrigere monatliche Raten, aber auch h&ouml;here
+                                    Gesamtkosten f&uuml;r das Darlehen.
+                                </li>
+
+                                <li>
+                                    H&ouml;he der Annuit&auml;t: Die H&ouml;he der Annuit&auml;t ist der Betrag, den Sie jeden Monat
+                                    f&uuml;r das Darlehen zur&uuml;ckzahlen m&uuml;ssen.
+                                    Sie sollte f&uuml;r Sie erschwinglich sein und in Ihr Budget passen.
+                                </li>
+
+                                <li>
+                                    Tilgungsplan: Der Tilgungsplan gibt an, wie das Darlehen zur&uuml;ckgezahlt wird. Es ist wichtig,
+                                    den Tilgungsplan zu verstehen, um sicherzustellen, dass Sie das Darlehen rechtzeitig
+                                    zur&uuml;ckzahlen.
+                                </li>
+
+                                <li>
+                                    Bearbeitungsgeb&uuml;hren: Einige Kreditgeber erheben m&ouml;glicherweise Bearbeitungsgeb&uuml;hren
+                                    f&uuml;r die Gew&auml;hrung des Darlehens.
+                                    Stellen Sie sicher, dass Sie die H&ouml;he dieser Geb&uuml;hren verstehen, bevor Sie das Darlehen
+                                    aufnehmen.
+                                </li>
+
+                                <li>
+                                    Sondertilgungen: &Uuml;berlegen Sie, ob Sie eine Sondertilgung leisten m&ouml;chten, um das Darlehen
+                                    schneller zur&uuml;ckzuzahlen und Zinsen zu sparen.
+                                    Stellen Sie sicher, dass dies im Tilgungsplan vorgesehen ist oder dass der Kreditgeber Sondertilgungen
+                                    akzeptiert.
+                                </li>
+
+                                <li>
+                                    Restschuldversicherung: Einige Kreditgeber bieten Restschuldversicherungen an, die die
+                                    R&uuml;ckzahlung des Darlehens im Falle von Arbeitslosigkeit, Krankheit oder Tod des Kreditnehmers
+                                    absichern. &Uuml;berlegen Sie, ob eine solche Versicherung sinnvoll ist und ob sie in Ihre
+                                    Budgetplanung passt.
+                                </li>
+                            </ol>
+                            <p>
+                                Es ist wichtig, alle diese Faktoren zu ber&uuml;cksichtigen, bevor Sie ein Annuit&auml;tendarlehen
+                                aufnehmen, um sicherzustellen, dass Sie das Darlehen p&uuml;nktlich und ohne finanzielle Belastungen
+                                zur&uuml;ckzahlen k&ouml;nnen.
+                            </p>
+                            <h5>Wieviel Kapital ben&ouml;tige ich, um eine Immobilie zu kaufen?</h5>
+                            Die H&ouml;he des Kapitals, das Sie ben&ouml;tigen, um eine Immobilie zu kaufen, h&auml;ngt von
+                            verschiedenen Faktoren ab, wie zum Beispiel:
+                            <ol>
+                                <li>
+                                    Kaufpreis der Immobilie: Der Kaufpreis ist der gr&ouml;&szlig;te Faktor, der bestimmt, wie viel
+                                    Kapital Sie ben&ouml;tigen. Dies h&auml;ngt von verschiedenen Faktoren ab, wie der Lage, der
+                                    Gr&ouml;&szlig;e und dem Zustand der Immobilie.
+                                </li>
+                                <li>
+                                    Nebenkosten: Beim Kauf einer Immobilie fallen auch Nebenkosten an, wie z.B. Grunderwerbsteuer,
+                                    Notargeb&uuml;hren, Maklerprovision und gegebenenfalls Kosten f&uuml;r eine Finanzierung.
+                                </li>
+                                <li>
+                                    Eigenkapital: Je mehr Eigenkapital Sie f&uuml;r den Kauf der Immobilie einbringen, desto geringer wird
+                                    Ihr Finanzierungsbedarf und desto niedriger sind in der Regel auch die Zinsen f&uuml;r ein Darlehen.
+                                </li>
+                                <li>
+                                    Finanzierungsbedarf: Falls Sie ein Darlehen f&uuml;r den Kauf der Immobilie ben&ouml;tigen,
+                                    m&uuml;ssen Sie auch die Kosten f&uuml;r die Tilgung und die Zinsen ber&uuml;cksichtigen.
+                                </li>
+                            </ol>
+                            <p>
+                                Eine Faustregel ist, dass Sie als K&auml;ufer in der Regel mindestens 20% des Kaufpreises der Immobilie
+                                als Eigenkapital einbringen sollten. Wenn Sie also beispielsweise eine Immobilie f&uuml;r 300.000 Euro
+                                kaufen m&ouml;chten, sollten Sie mindestens 60.000 Euro als Eigenkapital haben.
+
+                                Es ist jedoch wichtig zu betonen, dass jeder Kauf und jede Finanzierung individuell ist und von
+                                verschiedenen Faktoren abh&auml;ngt. Es ist daher ratsam, eine genaue Kalkulation des Kapitalbedarfs
+                                vorzunehmen und professionelle Beratung von einem Finanzexperten oder einem Immobilienmakler in Anspruch
+                                zu nehmen.
+                            </p>
+
+
+
+                            (Quelle: Chat GPT - stimmt trotzdem..)
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 pt-5 text-left text-light" style="font-family: Montserrat" ">
+                Weitere Infos: <br>
+                <a href=" https://de.wikipedia.org/wiki/Annuit%C3%A4tendarlehen" target="_blank">Wikipedia</a> <br>
+                <a href="https://www.finanzfluss.de/rechner/wieviel-haus-kann-ich-mir-leisten/" target="_blank">Finanzfluss</a> <br>
+                <a href="https://docplayer.org/212587485-Raten-zinsen-und-zinseszinsen.html" target="_blank">Formelsammlung</a><br>
+                <a href="https://www.ETF-Portfoliomanager.de" target="_blank">ETF Portfoliomanager</a> <br>
+            </div>
+        </div>
+
+
+    </div>
+  </div>
+  </div>
+  <script src="Javascript.js">  </script>
+</body>
+
+</html>
